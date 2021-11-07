@@ -36,7 +36,7 @@ fonts:
 
 scene:
     background:
-        color: [0.950,0.950,0.950]
+        color: [0.000,0.000,0.000]
 
 sources:
     # mapzen:
@@ -123,7 +123,7 @@ layers:
 
     landuse:
         data: { source: mapzen }
-        enabled: false
+        enabled: true
         draw:
             polygons:
                 order: global.feature_order
@@ -141,8 +141,9 @@ layers:
                     - protect_class: ['2','3','5']
             draw:
                 polygons:
-                    style: stripes-green-angle
-                    color: [0.500,0.500,0.500]
+                    # style: stripes-green-angle
+                    style: zigzag-noise
+                    color: [1.000,1.000,1.000]
                     visible: true
             us_national_park:
                 # yosemite national park, death valley national park, grand canyon national park
@@ -152,8 +153,9 @@ layers:
                         - protect_class: ['2','3','5']
                 draw:
                     polygons:
-                        style: stripes-green-angle
-                        color: [0.500,0.500,0.500]
+                        # style: stripes-green-angle
+                        style: zigzag-noise
+                        color: [1.000,1.000,1.000]
                         visible: true
 
         conservation:
@@ -164,7 +166,7 @@ layers:
             draw:
                 polygons:
                     style: zigzag-noise
-                    color: [0.500,0.500,0.500]
+                    color: [1.000,1.000,1.000]
                     # style: stripes-hatch
                     # color: [0.750,0.750,0.750]
                     visible: true
@@ -178,16 +180,18 @@ layers:
                     - operator: ['United States Forest Service']
             draw:
                 polygons:
-                    style: stripes-green-angle
-                    color: [0.400,0.400,0.400]
+                    # style: stripes-green-angle
+                    style: zigzag-noise
+                    color: [1.000,1.000,1.000]
                     visible: true
 
         forest-landcover:
             filter: { kind: [forest, natural_forest, wood, natural_wood, natural_park], $zoom: { min: 10 }, not: { operator: "United States Forest Service" } }
             draw:
                 polygons:
-                    style: stripes-green-horizontal
-                    color: [0.500,0.500,0.500]
+                    # style: stripes-green-horizontal
+                    style: zigzag-noise
+                    color: [1.000,1.000,1.000]
                     visible: true
 
         parks-and-national-forests-not-national-park:
@@ -350,7 +354,7 @@ styles:
                     //vec2 pos = getScreenNonStretchCoords();
                     //pos.y += sin(pos.x*30.)*.01;
                     color.rgb = mix(color.rgb, vec3(1.000),
-                    stripes(patternNoiseCoordsAnimate() * 85.0,0.75));
+                    stripes(patternNoiseCoordsAnimate() * 85.0,0.85));
 
 
     stripes-earth:
@@ -374,13 +378,13 @@ styles:
         mix: [space-tile, generative-noise, patterns-zigzag, pattern-noise]
         shaders:
             defines:
-                ZIGZAG_WIDTH: .4
-                ZIGZAG_SCALE: 35.
-                ZIGZAG_FREQ: 1.
+                ZIGZAG_WIDTH: .15
+                ZIGZAG_SCALE: 25.
+                ZIGZAG_FREQ: 2.
             uniforms:
                 u_noise_freq: 0.002
                 u_noise_scale: 0.04
-                u_background_color: [0.95, 0.95, 0.95]
+                u_background_color: [0.00, 0.00, 0.00]
             blocks:
                 color: |
                     float a = zigzag(patternNoiseCoords() * ZIGZAG_SCALE, ZIGZAG_FREQ, ZIGZAG_WIDTH);
